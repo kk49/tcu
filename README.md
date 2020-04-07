@@ -8,7 +8,7 @@ I'd like to use it to use it to track Troika! projects (modules, games people ru
 on the web. I'll probably break out the source data into another repo once the format is settled.
 
 ## Get your stuff on here
-To get something on here, you need to submit a json file named `sphere.json' and supporting files.
+To get something on here, you need to submit a json file named `sphere.json` and supporting files.
 The json file format is currently something like this.
 * Position should be within (+- 320, +-120) to be in "known space"
 * Let's start with a size of 1.0
