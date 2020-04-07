@@ -1,7 +1,8 @@
 {
   "type": "thing",
   "name": "Earth",
-  "position": [0.0, 0.0],
+  "position": [64.0, 32.0],
+  "size": 1.0,
   "description": "It's alright, I guess",
   "author": "Wouldn't you like to know",
   "link": "<a href='https://en.wikipedia.org/wiki/Earth' target='_blank'>Wikipedia: Earth</a>",

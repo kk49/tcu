@@ -57,8 +57,10 @@ def tileset_make(img, tile_path, tile_size=256, max_zoom=-1):
                     img.save(fpath)
 
 
-def build_map(background, spheres):
+def build_map(background, spheres_path):
     dpath = 'build'
+    map_size = 256.0
+    universe_size = 1024.0
     # process background
     org = Image.open(background)
     new_size = ((org.width + 256 - 1) // 256 * 256, (org.height + 256 - 1) // 256 * 256)
@@ -75,11 +77,86 @@ def build_map(background, spheres):
 
     tileset_make(bck, os.path.join(dpath, 'bck'))
 
+    # find spheres
+    spheres = []
+    for sd_rel in os.listdir(spheres_path):
+        sd_abs = os.path.join(spheres_path, sd_rel)
+        if os.path.isdir(sd_abs):
+            config = os.path.join(sd_abs, 'sphere.json')
+            if os.path.isfile(config):
+                with open(config, 'r') as f:
+                    sphere_config = json.load(f)
+                spheres.append([sphere_config, sd_rel, sd_abs])
+            else:
+                print(f'WARNING: {sd_abs} missing sphere.json')
+
+    # make spheres
+    shutil.rmtree(os.path.join(dpath, 'data'), ignore_errors=True)
+    os.makedirs(os.path.join(dpath, 'data'), exist_ok=True)
+    with open(os.path.join(dpath, 'data', 'spheres.js'), 'w') as f:
+        for sphere_config, sd_rel, sd_abs in spheres:
+            # copy image
+            has_image = False
+            if 'image' in sphere_config:
+                rel_img = sphere_config['image']
+                src_img = os.path.abspath(os.path.join(sd_abs, rel_img))
+                web_img = os.path.join('data', sd_rel, rel_img)
+                dst_img = os.path.abspath(os.path.join(dpath, web_img))
+                os.makedirs(os.path.split(dst_img)[0], exist_ok=True)
+                shutil.copy(src_img, dst_img)
+                img = Image.open(dst_img)
+                x0, y0 = sphere_config['position']
+                x = map_size / 2.0 + x0 / universe_size * map_size
+                y = -map_size / 2.0 + y0 / universe_size * map_size
+
+                szx = sphere_config['size']
+                szy = szx * img.height / img.width
+                image_bounds = [[y - szy, x - szx], [y + szy, x + szx]]
+
+                f.write('let obj = L.imageOverlay("{}", {}, {{alt: "{}", interactive:true, className: "crisp-image"}});\n'.format(
+                    web_img, image_bounds, sphere_config['name']
+                ))
+
+                f.write(
+                    f'obj.bindPopup("" +\n'
+                    f'  "<strong>Name:</strong> {sphere_config["name"]}<br>" +\n'
+                    f'  "<strong>Author:</strong> {sphere_config["author"]}<br>" +\n'
+                    f'  "<strong>Link:</strong> {sphere_config["link"]}<br>" +\n'
+                    f'  "{sphere_config["description"]}<br>" +\n'
+                    f'  "<small>{sphere_config["image_src"]}</small>");\n'
+                    )
+
+                f.write('obj.addTo(map);\n')
+
+        '''
+            imageUrl = 'data/earth/PIA21961.png';
+        x = 128;
+        y = -128;
+        scale = 2;
+        szx = scale;
+        szy = scale * 938.0 / 1672.0;
+        imageBounds = [[y-szy,x-szx], [y+szy,x+szx]];
+        earth = L.imageOverlay(
+            imageUrl,
+            imageBounds,
+            {alt: "Earth", interactive:true, className: 'crisp-image'}
+        );
+        earth.bindPopup("" +
+            "<strong>Name:</strong> Earth<br>" +
+            "<strong>Author:</strong> Wouldn't you like to know<br>" +
+            "<strong>Link:</strong> <a href='https://en.wikipedia.org/wiki/Earth' target='_blank'>Wikipedia: Earth</a><br>" +
+            "It's alright, I guess.<br>" +
+            "<small><a href='https://photojournal.jpl.nasa.gov/catalog/PIA21961' target='_blank'>Image Source</a></small>");
+        earth.addTo(map);
+        map.openPopup(earth.getPopup().getContent(), [-128,128], {});
+        '''
+        pass
+
     # copy library files
     copy_support_files = True
     if copy_support_files:
         dst = os.path.join(dpath, 'index.html')
-        if os.path.exists(dst):
+        if False and os.path.exists(dst):
             print('WARNING: {} already exists will not over-write'.format(dst))
         else:
             shutil.copyfile(os.path.join('tcu', 'static', 'index.html'), dst)
