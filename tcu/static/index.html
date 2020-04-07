@@ -13,8 +13,8 @@
         integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
         crossorigin=""></script>
     <script src="lib/Leaflet.MousePosition/src/L.Control.MousePosition.js"></script>
-<!--    <script src="https://unpkg.com/pouchdb@^5.2.0/dist/pouchdb.js"></script>-->
-<!--	<script src="https://unpkg.com/leaflet.tilelayer.pouchdbcached@latest/L.TileLayer.PouchDBCached.js"></script>-->
+    <script src="https://unpkg.com/pouchdb@^5.2.0/dist/pouchdb.js"></script>
+	<script src="https://unpkg.com/leaflet.tilelayer.pouchdbcached@latest/L.TileLayer.PouchDBCached.js"></script>
 <!--    <script src="data/data.js"></script>-->
 
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
@@ -228,7 +228,7 @@
     }
 
     var all_layers = [
-        ['Space', true, 0, 'Image from NASA ', 'bck', './{id}/{z}/{x}/{y}.png', 6, 1.0],
+        ['Space', true, 0, "<a href='https://photojournal.jpl.nasa.gov/catalog/PIA22568' target='_blank'>Image from NASA</a>", 'bck', './{id}/{z}/{x}/{y}.png', 4, 1.0],
     ];
 
     var baseMaps = {}
@@ -286,6 +286,28 @@
         overlayMaps,
         {collapsed: collapse_layers}
     ).addTo(map);
+
+
+    imageUrl = 'data/earth/PIA21961.png';
+    x = 128;
+    y = -128;
+    scale = 2;
+    szx = scale;
+    szy = scale * 938.0 / 1672.0;
+    imageBounds = [[y-szy,x-szx], [y+szy,x+szx]];
+    earth = L.imageOverlay(
+        imageUrl,
+        imageBounds,
+        {alt: "Earth", interactive:true, className: 'crisp-image'}
+    );
+    earth.bindPopup("" +
+        "<strong>Name:</strong> Earth<br>" +
+        "<strong>Author:</strong> Wouldn't you like to know<br>" +
+        "<strong>Link:</strong> <a href='https://en.wikipedia.org/wiki/Earth' target='_blank'>Wikipedia: Earth</a><br>" +
+        "It's alright, I guess.<br>" +
+        "<small><a href='https://photojournal.jpl.nasa.gov/catalog/PIA21961' target='_blank'>Image Source</a></small>");
+    earth.addTo(map);
+    map.openPopup(earth.getPopup().getContent(), [-128,128], {});
 </script>
 
 </body>
