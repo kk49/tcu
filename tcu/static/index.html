@@ -19,15 +19,24 @@
 
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <style>
-        body { margin:0; padding:0; }
-        #mapid { position:absolute; top:0; bottom:0; width:100%; }
-        #xmapid { height: 800px; }
+        body { width: 100%; position: absolute; top: 0; bottom: 0; margin:0; padding:0; }
+        #main { width: 100%; position: absolute; top: 0; bottom: 0; display: flex; flex-direction: column; }
+        #intro { }
+        #mapid { flex-grow: 1; }
+        /*body { margin:0; padding:0;}*/
+        /*#intro { position: absolute; height:10%; width:100%; }*/
+        /*#mapid { position: absolute; top:10%; bottom:0; width:100%; }*/
     </style>
 </head>
 
 <body>
-
+<div id="main">
+<div id="intro">
+<h1>TCU is a map of Troika! related sights</h1>
+<p>TCU is an independent production by MathArtBang and is not affiliated with the Melsonian Arts Council.</p>
+</div>
 <div id="mapid"></div>
+</div>
 
 <script>
     let urlParams = new URLSearchParams(window.location.search);
