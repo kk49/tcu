@@ -1,5 +1,5 @@
 {
-  "type": "thing",
+  "type": "module",
   "name": "Earth",
   "position": [0.0, 0.0],
   "size": 2.0,

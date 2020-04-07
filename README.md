@@ -19,15 +19,17 @@ The json file format is currently something like this.
 
 ```json
 {
-  "type": "game",
+  "type": "module",
   "name": "Earth",
   "position": [64.0, 32.0],
   "size": 1.0,
   "description": "It's alright, I guess",
   "author": "Wouldn't you like to know",
-  "link": "<a href='https://en.wikipedia.org/wiki/Earth' target='_blank'>Wikipedia: Earth</a>",
+  "link": 
+    "<a href='https://en.wikipedia.org/wiki/Earth' target='_blank'>Wikipedia: Earth</a>",
   "image": "PIA21961.png",
-  "image_src": "<a href='https://photojournal.jpl.nasa.gov/catalog/PIA21961' target='_blank'>Image Source</a>"
+  "image_src": 
+    "<a href='https://photojournal.jpl.nasa.gov/catalog/PIA21961' target='_blank'>Image Source</a>"
 }
 ```
 
