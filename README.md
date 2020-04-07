@@ -12,10 +12,14 @@ To get something on here, you need to submit a json file named `sphere.json` and
 The json file format is currently something like this.
 * Position should be within (+- 320, +-120) to be in "known space"
 * Let's start with a size of 1.0
-
+* Type should currently be one of these
+  * "module" - for a Troika Compatiable module/art thing
+  * "game" - for an actively run sphere
+  * "missed-connection" - for a missed connection
 
 ```json
 {
+  "type": "game",
   "name": "Earth",
   "position": [64.0, 32.0],
   "size": 1.0,
