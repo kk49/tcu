@@ -1,4 +1,4 @@
-# Troika! Cinematic Universe (TCU)
+# TCU
 _TCU is an independent production by MathArtBang and is not affiliated with the Melsonian Arts Council._
 
 Live version https://kk49.github.io/tcu/

@@ -128,30 +128,6 @@ def build_map(background, spheres_path):
 
                 f.write('obj.addTo(map);\n')
 
-        '''
-            imageUrl = 'data/earth/PIA21961.png';
-        x = 128;
-        y = -128;
-        scale = 2;
-        szx = scale;
-        szy = scale * 938.0 / 1672.0;
-        imageBounds = [[y-szy,x-szx], [y+szy,x+szx]];
-        earth = L.imageOverlay(
-            imageUrl,
-            imageBounds,
-            {alt: "Earth", interactive:true, className: 'crisp-image'}
-        );
-        earth.bindPopup("" +
-            "<strong>Name:</strong> Earth<br>" +
-            "<strong>Author:</strong> Wouldn't you like to know<br>" +
-            "<strong>Link:</strong> <a href='https://en.wikipedia.org/wiki/Earth' target='_blank'>Wikipedia: Earth</a><br>" +
-            "It's alright, I guess.<br>" +
-            "<small><a href='https://photojournal.jpl.nasa.gov/catalog/PIA21961' target='_blank'>Image Source</a></small>");
-        earth.addTo(map);
-        map.openPopup(earth.getPopup().getContent(), [-128,128], {});
-        '''
-        pass
-
     # copy library files
     copy_support_files = True
     if copy_support_files:
