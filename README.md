@@ -1,6 +1,10 @@
 # tcu
 Troika! Cinematic Universe
 
+# type of listing
+* Thing
+* Experience
+
 # assets
 ## Nebula
 * https://photojournal.jpl.nasa.gov/catalog/PIA22568
