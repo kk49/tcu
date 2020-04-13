@@ -68,7 +68,7 @@ def build_map(background, spheres_path):
     new_size = 8192
     new_size = (new_size, new_size)
 
-    bck = Image.new('RGB', new_size, 0)
+    bck = Image.new('RGBA', new_size, 0)
 
     h_offset = (bck.width - org.width) // 2
     v_offset = (bck.height - org.height) // 2

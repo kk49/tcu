@@ -13,7 +13,7 @@ The json file format is currently something like this.
 * Position should be within (+- 320, +-120) to be in "known space"
 * Let's start with a size of 1.0
 * Type should currently be one of these
-  * "module" - for a Troika! Compatible module/art thing
+  * "module" - for a Troika! Compatible module/art sphere
   * "game" - for an actively run sphere
   * "missed-connection" - for a missed connection
 
