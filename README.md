@@ -1,7 +1,7 @@
 # TCU
 _TCU is an independent production by MathArtBang and is not affiliated with the Melsonian Arts Council._
 
-Live version https://kk49.github.io/tcu/
+Live version https://mathartbang.com/tcu/
 
 A tool to generate a G**gle Maps style web map that can place graphics and a popup on a zoomable background. 
 I'd like to use it to use it to track Troika! projects (modules, games people run, missed connections, etc...) 
